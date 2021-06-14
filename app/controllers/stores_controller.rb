@@ -5,7 +5,7 @@ class StoresController < ApplicationController
   end
 
   def create
-    @store = Store.create(store_params)
+    store = Store.create(store_params)
     # need validation check that user can only have one store
     @store.save
     render :json => @store

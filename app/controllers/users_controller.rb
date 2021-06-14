@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
 
+  before_action: authorized
+
   def create
     @user = User.create(user_params)
     if @user.valid?
@@ -8,16 +10,6 @@ class UsersController < ApplicationController
       render json: { user: UserSerializer.new(@user)}
     else
       render json: {error: "Email is already tied to an exisiting account."}
-    end
-  end
-
-  def login
-    @user = User.find_by(username: params[:user][:email])
-    if @user && @user.authenticate(params[:user][:password])
-      token = encode_token({user_id: @user.id})
-      render json: { user: UserSerializer.new(@user) }, status: :accepted
-    else
-      render json: {error: "Email or password don't match. Please try again.", status: :unauthorized}
     end
   end
 
