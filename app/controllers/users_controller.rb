@@ -1,12 +1,12 @@
 class UsersController < ApplicationController
 
-  before_action :authorized, only: [:auto_login]
-
+  skip_before_action :authorized, only: [:create]
+  
   def create
-    @user = User.create(user_params)
-    if @user.valid?
-      @token = encode_token(user_id: @user.id)
-      render json: { user: UserSerializer.new(@user), jwt: @token }, status: :created
+    user = User.create(user_params)
+    if user.valid?
+      token = encode_token(user_id: user.id)
+      render json: { user: UserSerializer.new(user), jwt: token }
     else
       render json: {error: "Email is already tied to an exisiting account."}
     end
