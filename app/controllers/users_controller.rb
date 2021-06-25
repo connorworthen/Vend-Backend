@@ -12,6 +12,16 @@ class UsersController < ApplicationController
     end
   end
 
+  def update
+    user = User.find_by(email: params[:user][:email])
+    if user.update(user_params)
+      user.save
+      render json: { user: user }
+    else
+      render json: { error: "Unable to update profile. Please try again."}
+    end
+  end
+
   private 
   
   def user_params
