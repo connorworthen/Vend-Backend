@@ -1,7 +1,12 @@
 class UsersController < ApplicationController
 
-  skip_before_action :authorized, only: [:create]
+  skip_before_action :authorized, only: [:show, :create]
   
+  def show
+    user = User.find_by(id: params[:id])
+    render json: user
+  end
+
   def create
     user = User.create(user_params)
     if user.valid?

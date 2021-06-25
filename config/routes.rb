@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :users, only: [:create, :update, :delete]
+  resources :users, only: [:show, :create, :update, :delete]
   post '/login', to: 'sessions#login'
   get 'auto_login', to: 'sessions#auto_login'
 
