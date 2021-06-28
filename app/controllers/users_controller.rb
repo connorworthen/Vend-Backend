@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  skip_before_action :authorized, only: [:show, :create]
+  skip_before_action :authorized, only: [:show, :create, :update]
   
   def show
     user = User.find_by(id: params[:id])
@@ -18,10 +18,9 @@ class UsersController < ApplicationController
   end
 
   def update
-    user = User.find_by(email: params[:user][:email])
+    user = User.find(params[:id])
     if user.update(user_params)
-      user.save
-      render json: { user: user }
+      render json: { user: user, success: "updated" }
     else
       render json: { error: "Unable to update profile. Please try again."}
     end
