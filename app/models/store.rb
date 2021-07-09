@@ -7,3 +7,5 @@ class Store < ApplicationRecord
   validates :company_email, :presence => true, :uniqueness => true
   validates :description, :presence => true, :length => { maximum: 500 }
 end
+
+# need to submit create store with user id + check serializer + models relationships
