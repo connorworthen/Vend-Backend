@@ -4,7 +4,9 @@ class SessionsController < ApplicationController
 
   def login
     user = User.find_by(email: params[:user][:email])
+    # binding.pry
     if user && user.authenticate(params[:user][:password])
+      # binding.pry
       token = encode_token({user_id: user.id})
       render json: { user: user, jwt: token }, status: :accepted
     else

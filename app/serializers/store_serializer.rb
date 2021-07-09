@@ -1,3 +1,3 @@
 class StoreSerializer < ActiveModel::Serializer
-  attributes :id, :item, :price, :stock
+  attributes :id, :company_name, :company_email, :description
 end

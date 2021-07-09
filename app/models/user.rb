@@ -2,9 +2,9 @@ class User < ApplicationRecord
   has_secure_password
 
   has_one_attached :avatar
-  has_many :reviews
+  # has_many :reviews
   has_one :store
-  has_many :items, :through => :store
+  # has_many :items, :through => :store
   
   validates :first, :presence => true
   validates :last, :presence => true

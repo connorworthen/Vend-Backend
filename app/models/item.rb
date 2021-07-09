@@ -1,5 +1,5 @@
 class Item < ApplicationRecord
-  belongs_to :store
+  # belongs_to :store
 
   validates :name, :presence => true
   validates :description, :presence => true, :length => { maximum: 500 }
