@@ -1,24 +1,27 @@
 class StoresController < ApplicationController
 
-  skip_before_action :authorized, only: [:create]
+  skip_before_action :authorized, only: [:create, :show]
 
-  def index
-    render json: Stores.all
+  def show
+    @store = Store.find(params[:id])
+    render json: @store
   end
-
+  
   def create
-    store = Store.new(store_params) 
-    # need validation check that user can only have one store
-    if store.save
-      render json: { store: StoreSerializer.new(store), success: "success" }
+    store = Store.create(store_params)
+    
+    # binding.pry
+    if store.valid?
+      # binding.pry
+      render json: { store: store, success: "success" } 
     else
-      render json: { error: "error"}
+      render json: { error: "Error. Please try again!"}
     end
   end 
 
   private
 
   def store_params
-    params.require(:store).permit(:company_name, :company_email, :description)
+    params.require(:store).permit(:company_name, :company_email, :description, :user_id)
   end
 end
