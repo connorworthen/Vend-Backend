@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_20_215241) do
+ActiveRecord::Schema.define(version: 2021_07_21_000632) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,12 +52,10 @@ ActiveRecord::Schema.define(version: 2021_07_20_215241) do
   end
 
   create_table "stores", force: :cascade do |t|
+    t.string "supplier"
+    t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "company_name"
-    t.string "company_email"
-    t.text "description"
-    t.bigint "user_id"
     t.index ["user_id"], name: "index_stores_on_user_id"
   end
 
@@ -73,5 +71,4 @@ ActiveRecord::Schema.define(version: 2021_07_20_215241) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "stores", "users"
 end
