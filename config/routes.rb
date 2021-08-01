@@ -3,10 +3,5 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#login'
   get 'auto_login', to: 'sessions#auto_login'
 
-  resources :reviews
-  resources :stores, only: [:create, :show]
-  resources :users do
-    resources :stores
-  end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

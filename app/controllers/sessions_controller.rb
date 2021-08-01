@@ -3,10 +3,8 @@ class SessionsController < ApplicationController
   before_action :authorized, only: [:auto_login]
 
   def login
-    user = User.find_by(email: params[:user][:email])
-    # binding.pry
+    user = User.find_by(username: params[:user][:username] || email: params[:user][:email])
     if user && user.authenticate(params[:user][:password])
-      # binding.pry
       token = encode_token({user_id: user.id})
       render json: { user: user, jwt: token }, status: :accepted
     else
