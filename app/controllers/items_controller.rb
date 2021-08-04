@@ -7,6 +7,11 @@ class ItemsController < ApplicationController
     render json: items
   end
 
+  def show
+    item = Item.find_by(id: params[:id])
+    render json: item
+  end
+
   def create
     item = Item.create(item_params)
     if item.valid?
@@ -19,6 +24,7 @@ class ItemsController < ApplicationController
   private
 
   def items_params
-    params.require(:item).permit(:name, :description, :price, :available, :user_id, :image)
+    params.require(:item).permit(:name, :description, :price, :user_id, :image)
   end
+
 end
