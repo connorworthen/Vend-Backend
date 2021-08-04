@@ -1,19 +1,19 @@
 class UserSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
 
-  attributes :id, :username, :email, :avatar
+  attributes :id, :username, :email, :image
 
-  def avatar
-    return unless object.avatar.attached?
+  def image
+    return unless object.image.attached?
     
-    object.avatar.blob.attributes
+    object.image.blob.attributes
           .slice('filename', 'byte_size')
-          .merge(url: avatar_url)
+          .merge(url: image_url)
           .tap { |attrs| attrs['name'] = attrs.delete('filename') }
   end
 
-  def avatar_url
-    url_for(object.avatar)
+  def image_url
+    url_for(object.image)
   end
 
 end

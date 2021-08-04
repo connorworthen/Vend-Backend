@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
-  resources :users, only: [:show, :create, :update, :delete]
+  resources :users, only: [:show, :create, :update, :delete, :index]
   post '/login', to: 'sessions#login'
   get 'auto_login', to: 'sessions#auto_login'
+  resources :users do
+    resources :items
+  end
+  resources :items
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

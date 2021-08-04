@@ -1,9 +1,14 @@
 class UsersController < ApplicationController
 
-  skip_before_action :authorized, only: [:show, :create, :update]
+  skip_before_action :authorized, only: [:show, :create, :update, :index]
   
   def show
     user = User.find_by(id: params[:id])
+    render json: user
+  end
+
+  def index
+    user = User.all
     render json: user
   end
 
@@ -29,7 +34,7 @@ class UsersController < ApplicationController
   private 
   
   def user_params
-    params.permit(:username, :email, :password, :avatar)
+    params.permit(:username, :email, :password, :image)
   end
 
 end
