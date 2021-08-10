@@ -13,18 +13,18 @@ class ItemsController < ApplicationController
   end
 
   def create
-    item = Item.create(item_params)
+    item = Item.create(items_params)
     if item.valid?
-      render json: { item: item, success: "test"}
+      render json: item
     else
-      render json: {error: "Failed to post itemz."}
+      render json: {error: "Failed to post items."}
     end
   end
   
   private
 
   def items_params
-    params.require(:item).permit(:name, :description, :price, :user_id, :image)
+    params.permit(:name, :description, :price, :user_id, :image)
   end
 
 end
